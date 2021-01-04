@@ -1,0 +1,38 @@
+version: "3.2"
+networks:
+  external:
+    external: true
+
+  rust:
+    image: didstopia/rust-server
+    container_name: Rust
+    ports:
+      - 28015:28015
+      - 28015:28015/udp
+      - 28016:28016
+      - 28082:28082
+    volumes:
+      - ${STORAGE_DATA}/rust:/steamcmd/rust
+    environment:
+      - 'TZ=Europe/Berlin'
+      - 'RUST_SERVER_STARTUP_ARGUMENTS=${rust_startup_aug}'
+      - 'RUST_SERVER_IDENTITY=rust1'
+      - 'RUST_SERVER_NAME=${rust_name}'
+      - 'RUST_SERVER_DESCRIPTION=${rust_description}'
+      - 'RUST_SERVER_URL=${rust_url}'
+      - 'RUST_SERVER_BANNER_URL=${rust_banner}'
+      - 'RUST_RCON_WEB=1'
+      - 'RUST_RCON_PORT=28016'
+      - 'RUST_RCON_PASSWORD=${rust_rcon_pw}'
+      - 'RUST_UPDATE_CHECKING=1'
+      - 'RUST_UPDATE_BRANCH=public'
+      - 'RUST_START_MODE=0'
+      - 'RUST_OXIDE_ENABLED=1'
+      - 'RUST_OXIDE_UPDATE_ON_BOOT=1'
+      - 'RUST_SERVER_SEED=${rust_seed}'
+      - 'RUST_SERVER_WORLDSIZE=${rust_worldsize}'
+      - 'RUST_SERVER_MAXPLAYERS=${rust_slots}'
+      - 'RUST_SERVER_SAVE_INTERVAL=600'
+    networks:
+      - external
+    restart: unless-stopped
