@@ -1,8 +1,10 @@
+
 version: "3.2"
 networks:
   external:
     external: true
 
+services:
   rust:
     image: didstopia/rust-server
     container_name: Rust
